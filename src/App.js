@@ -1,10 +1,12 @@
 import Navbar from './components/header/index'
+import Home from './components/containers/home/index'
+import './App.css';
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <Navbar></Navbar>
-      <h1>holitas</h1>
+      <Home></Home>
     </div>
   );
 }
