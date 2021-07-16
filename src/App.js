@@ -1,13 +1,17 @@
 import Navbar from './components/header/index'
 import Home from './components/containers/home/index'
+import PaginationFooter from './components/footer/pagination/index'
 import './App.css';
 
-function App() {
-  return (
-    <div>
-      <Navbar></Navbar>
-      <Home></Home>
-    </div>
+const App = () => {
+    return (
+    <>
+      <div className="App">
+        <Navbar></Navbar>
+        <Home></Home>
+{/*         <PaginationFooter></PaginationFooter> */}
+      </div> 
+    </>
   );
 }
 
