@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const DividedButtonsWrapper = (props) => {
+const DividedLayoutButtons = (props) => {
   const classes = useStyles()
 
   return (
@@ -19,4 +19,4 @@ const DividedButtonsWrapper = (props) => {
   )
 }
 
-export default DividedButtonsWrapper
+export default DividedLayoutButtons

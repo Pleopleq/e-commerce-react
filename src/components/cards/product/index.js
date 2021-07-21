@@ -1,63 +1,18 @@
-import { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles'
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import { Box } from '@material-ui/core';
-import SimpleModal from '../../containers/modals';
-import DividedButtonsWrapper from '../../buttons/DividedButtonsWrapper';
-
-function getModalStyle() {
-  const top = 50 
-  const left = 50 
-
-  return {
-      top: `${top}%`,
-      left: `${left}%`,
-      transform: `translate(-${top}%, -${left}%)`,
-  }
-}
+import { useState } from 'react'
+import 
+{ Box, 
+  Typography, 
+  Button, 
+  CardMedia, 
+  CardContent, 
+  CardActionArea, 
+  Card } from '@material-ui/core'
+import SimpleModal from '../../containers/modals'
+import ProductModalBody from '../../containers/modals/modalContent/ProductModalBody'
 
 const ProductCard = ({ name, description, imageCover, price, key }) => {
     const [isOpen, setIsOpen] = useState(false)
 
-    
-    const useStyles = makeStyles((theme) => ({
-      paper: {
-          position: 'absolute',
-          width: 400,
-          backgroundColor: theme.palette.background.paper,
-          border: '2px solid #000',
-          boxShadow: theme.shadows[5],
-          padding: theme.spacing(2, 4, 3),
-      },
-      }));
-  
-    const classes = useStyles()
-
-
-  const modalBody = (
-    <div style={getModalStyle()} className={classes.paper}>
-      <h2 id="simple-modal-title">{name}</h2>
-      <img
-          style={{ display: "block", maxWidth: "100%"}}
-          alt={`${name} cover`}
-          src={imageCover}
-          title={`${name} cover`}>
-          </img>
-      <p id="simple-modal-description">
-        {description}
-      </p>
-      <DividedButtonsWrapper>
-          <Button variant="contained" color="secondary">Buy it for ${price}</Button>
-          <Button variant="contained" color="primary">Add to wishlist</Button>
-      </DividedButtonsWrapper>
-    </div>
-  )
-    
     const handleOpenModal = () => {
       setIsOpen(true)
     }
@@ -84,23 +39,29 @@ const ProductCard = ({ name, description, imageCover, price, key }) => {
               <Typography variant="caption" color="textSecondary" component="p">
                 {description}
               </Typography>
+              <Typography color="secondary" component="p">Price: ${price}</Typography>
             </Box>
           </CardContent>
         </CardActionArea>
         <Box display="flex" justifyContent="space-between" m="1rem">
             <Button size="small" color="primary">
-              Buy it for {price}
+              Add to cart
             </Button>
             <Button size="small" color="primary">
               Add to wishlist
             </Button>
           </Box>
-          <>
-        <SimpleModal handleOpen={isOpen} handleClose={handleCloseModal} body={modalBody}>
+        <>
+        <SimpleModal handleOpen={isOpen} handleClose={handleCloseModal}>
+          <ProductModalBody
+          name={name}
+          imageCover={imageCover}
+          description={description}
+          price={price}
+          ></ProductModalBody>
         </SimpleModal>
-      </>
+        </>
       </Card>
-
     )
   }
 
