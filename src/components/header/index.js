@@ -4,6 +4,8 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import AppBar from '@material-ui/core/AppBar'
 import Button from '@material-ui/core/Button'
 import SimpleModal from '../containers/modals'
+import LoginModalBody from '../containers/modals/modalContent/LoginModalBody'
+import RegisterModalBody from '../containers/modals/modalContent/RegisterModalBody'
 import useModal from '../../hooks/useModal'
 import { useSelector } from 'react-redux'
 import { LOGIN_MODAL, REGISTER_MODAL, NO_MODAL } from '../../redux/Modals/types'
@@ -28,8 +30,8 @@ const Header = () => {
         <>
         <SimpleModal handleOpen={isOpen} handleClose={() => handleCloseModal(NO_MODAL)}>
             <div>
-            {modal === LOGIN_MODAL && <div>LOGIN LOGIN</div>}
-            {modal === REGISTER_MODAL && <div>REGISTER REGISTER</div>}
+            {modal === LOGIN_MODAL && <LoginModalBody></LoginModalBody>}
+            {modal === REGISTER_MODAL && <RegisterModalBody></RegisterModalBody>}
             </div> 
         </SimpleModal>
         </>

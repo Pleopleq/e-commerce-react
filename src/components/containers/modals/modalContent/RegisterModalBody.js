@@ -2,7 +2,7 @@ import Button from '@material-ui/core/Button'
 import { makeStyles, TextField } from '@material-ui/core'
 import getModalStyle from '../../../../helpers/getModalStyle'
 
-const LoginModalBody = () => {
+const RegisterModalBody = () => {
   const useStyles = makeStyles((theme) => ({
     paper: {
         position: 'absolute',
@@ -19,22 +19,27 @@ const LoginModalBody = () => {
 
     return (
         <div style={getModalStyle()} className={classes.paper}>
-            <h1>Login</h1>
+            <h1>Register</h1>
             <form noValidate autoComplete="off">
                 <TextField
                     label="Username"
                     type="username"
-                    autoComplete="current-password"
+                    autoComplete="current-username"
                 />
                 <TextField
                     label="Password"
                     type="password"
                     autoComplete="current-password"
                 />
+                <TextField
+                    label="Email"
+                    type="email"
+                    autoComplete="current-email"
+                />
             </form>
-            <Button variant="contained" color="primary">Login</Button>
+            <Button variant="contained" color="primary">Submit</Button>
         </div>
     )
 }
 
-export default LoginModalBody
+export default RegisterModalBody
