@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import 
 { Box, 
   Typography, 
@@ -9,21 +8,15 @@ import
   Card } from '@material-ui/core'
 import SimpleModal from '../../containers/modals'
 import ProductModalBody from '../../containers/modals/modalContent/ProductModalBody'
+import useModal from '../../../hooks/useModal'
+import { PRODUCT_MODAL, NO_MODAL } from '../../../redux/Modals/types'
 
 const ProductCard = ({ name, description, imageCover, price, key }) => {
-    const [isOpen, setIsOpen] = useState(false)
-
-    const handleOpenModal = () => {
-      setIsOpen(true)
-    }
-
-    const handleCloseModal = () => {
-      setIsOpen(false)
-    }
+  const { isOpen, handleOpenModal, handleCloseModal } = useModal()
 
     return (
       <Card key={key}>
-        <CardActionArea onClick={handleOpenModal}>
+        <CardActionArea onClick={() => handleOpenModal(PRODUCT_MODAL)}>
           <CardMedia
             component="img"
             alt={`${name} cover`}
@@ -52,7 +45,7 @@ const ProductCard = ({ name, description, imageCover, price, key }) => {
             </Button>
           </Box>
         <>
-        <SimpleModal handleOpen={isOpen} handleClose={handleCloseModal}>
+        <SimpleModal handleOpen={isOpen} handleClose={() => handleCloseModal(NO_MODAL)}>
           <ProductModalBody
           name={name}
           imageCover={imageCover}

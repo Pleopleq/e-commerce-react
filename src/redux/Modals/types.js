@@ -1,0 +1,4 @@
+export const LOGIN_MODAL = 'LOGIN_MODAL'
+export const REGISTER_MODAL = 'REGISTER_MODAL'
+export const PRODUCT_MODAL = 'PRODUCT_MODAL'
+export const NO_MODAL = 'NO_MODAL'

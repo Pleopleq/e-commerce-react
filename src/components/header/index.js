@@ -1,10 +1,17 @@
 
 import { Badge, Box, IconButton, Toolbar } from '@material-ui/core'
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import AppBar from '@material-ui/core/AppBar'
 import Button from '@material-ui/core/Button'
+import SimpleModal from '../containers/modals'
+import useModal from '../../hooks/useModal'
+import { useSelector } from 'react-redux'
+import { LOGIN_MODAL, REGISTER_MODAL, NO_MODAL } from '../../redux/Modals/types'
 
 const Header = () => {
+    const {isOpen, handleOpenModal, handleCloseModal} = useModal()
+    const modal = useSelector((state) => state.modalReducer.modal)
+
     return (
     <AppBar position="static" >
         <Box display="flex" justifyContent="flex-end">
@@ -14,10 +21,18 @@ const Header = () => {
                         <ShoppingCartIcon ></ShoppingCartIcon>
                     </Badge>
                 </IconButton>
-                <Button color="inherit">Login</Button>
-                <Button color="inherit">Register</Button>
+                <Button color="inherit" onClick={() => handleOpenModal(LOGIN_MODAL)}>Login</Button>
+                <Button color="inherit" onClick={() => handleOpenModal(REGISTER_MODAL)}>Register</Button>
             </Toolbar>
         </Box>
+        <>
+        <SimpleModal handleOpen={isOpen} handleClose={() => handleCloseModal(NO_MODAL)}>
+            <div>
+            {modal === LOGIN_MODAL && <div>LOGIN LOGIN</div>}
+            {modal === REGISTER_MODAL && <div>REGISTER REGISTER</div>}
+            </div> 
+        </SimpleModal>
+        </>
     </AppBar>
     )
 }
