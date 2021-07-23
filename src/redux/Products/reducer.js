@@ -1,7 +1,7 @@
 import { GET_PRODUCTS } from './types'
 
 const INITIAL_STATE = {
-    products: [],
+  products: [],
 }
 
 const productsReducer = (state = INITIAL_STATE, { type, payload }) => {
@@ -15,4 +15,4 @@ const productsReducer = (state = INITIAL_STATE, { type, payload }) => {
     }
 }
 
-export default productsReducer;
+export default productsReducer

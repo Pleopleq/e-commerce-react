@@ -10,9 +10,14 @@ import SimpleModal from '../../containers/modals'
 import ProductModalBody from '../../containers/modals/modalContent/ProductModalBody'
 import useModal from '../../../hooks/useModal'
 import { PRODUCT_MODAL, NO_MODAL } from '../../../redux/Modals/types'
+import { useDispatch, useSelector } from 'react-redux'
+import { addItemToCart } from '../../../redux/Cart/actions'
 
-const ProductCard = ({ name, description, imageCover, price, key }) => {
+const ProductCard = ({ name, description, imageCover, price, key, id, isInCart }) => {
   const { isOpen, handleOpenModal, handleCloseModal } = useModal()
+  const cartItems = useSelector((state) => state.cartReducer.items)
+  const dispatch = useDispatch()
+  console.log(cartItems)
 
     return (
       <Card key={key}>
@@ -37,7 +42,7 @@ const ProductCard = ({ name, description, imageCover, price, key }) => {
           </CardContent>
         </CardActionArea>
         <Box display="flex" justifyContent="space-between" m="1rem">
-            <Button size="small" color="primary">
+            <Button size="small" color="primary" onClick={() => dispatch(addItemToCart(cartItems, {id, name, price, isInCart}))}>
               Add to cart
             </Button>
             <Button size="small" color="primary">
