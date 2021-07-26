@@ -9,15 +9,16 @@ import
 import SimpleModal from '../../containers/modals'
 import ProductModalBody from '../../containers/modals/modalContent/ProductModalBody'
 import useModal from '../../../hooks/useModal'
-import { PRODUCT_MODAL, NO_MODAL } from '../../../redux/Modals/types'
+import { PRODUCT_MODAL, LOGIN_MODAL, NO_MODAL } from '../../../redux/Modals/types'
 import { useDispatch, useSelector } from 'react-redux'
 import { addItemToCart } from '../../../redux/Cart/actions'
+import LoginModalBody from '../../containers/modals/modalContent/LoginModalBody'
 
 const ProductCard = ({ name, description, imageCover, price, key, id, isInCart }) => {
   const { isOpen, handleOpenModal, handleCloseModal } = useModal()
+  const modal = useSelector((state) => state.modalReducer.modal)
   const cartItems = useSelector((state) => state.cartReducer.items)
   const dispatch = useDispatch()
-  console.log(cartItems)
 
     return (
       <Card key={key}>
@@ -45,18 +46,23 @@ const ProductCard = ({ name, description, imageCover, price, key, id, isInCart }
             <Button size="small" color="primary" onClick={() => dispatch(addItemToCart(cartItems, {id, name, price, isInCart}))}>
               Add to cart
             </Button>
-            <Button size="small" color="primary">
+            <Button size="small" color="primary" onClick={() => handleOpenModal(LOGIN_MODAL)}>
               Add to wishlist
             </Button>
           </Box>
         <>
         <SimpleModal handleOpen={isOpen} handleClose={() => handleCloseModal(NO_MODAL)}>
+          <div>
+          {modal === LOGIN_MODAL && <LoginModalBody></LoginModalBody>}
+          {modal === PRODUCT_MODAL && 
           <ProductModalBody
-          name={name}
-          imageCover={imageCover}
-          description={description}
-          price={price}
-          ></ProductModalBody>
+            name={name}
+            imageCover={imageCover}
+            description={description}
+            price={price}
+            ></ProductModalBody>
+            }
+          </div>
         </SimpleModal>
         </>
       </Card>

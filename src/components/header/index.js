@@ -9,24 +9,18 @@ import RegisterModalBody from '../containers/modals/modalContent/RegisterModalBo
 import useModal from '../../hooks/useModal'
 import { useSelector } from 'react-redux'
 import { LOGIN_MODAL, REGISTER_MODAL, NO_MODAL } from '../../redux/Modals/types'
-import { useEffect, useState } from 'react'
 
 const Header = () => {
     const {isOpen, handleOpenModal, handleCloseModal} = useModal()
-    const [itemsInCart, setItemsInCart] = useState([])
     const modal = useSelector((state) => state.modalReducer.modal)
     const cartItems = useSelector((state) => state.cartReducer.items)
-
-    useEffect(() => {
-        setItemsInCart(cartItems)
-    }, [cartItems, itemsInCart])
 
     return (
     <AppBar position="static" >
         <Box display="flex" justifyContent="flex-end">
             <Toolbar >
                 <IconButton aria-label="cart">
-                    <Badge badgeContent={itemsInCart.length} color="secondary">
+                    <Badge badgeContent={cartItems.length} color="secondary">
                         <ShoppingCartIcon ></ShoppingCartIcon>
                     </Badge>
                 </IconButton>

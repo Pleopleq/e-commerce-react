@@ -9,7 +9,7 @@ const cartReducer = (state = INITIAL_STATE, { type, payload }) => {
         case ADD_TO_CART:
            return {
              ...state, 
-             items: payload
+             items: [...payload]
            }
          default: return state
     }
