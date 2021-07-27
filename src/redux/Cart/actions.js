@@ -1,13 +1,15 @@
 import { ADD_TO_CART, DELETE_FROM_CART } from './types'
 
-export const addItemToCart = (items, product) => (dispatch) => {  
+export const addItemToCart = (items, product) => (dispatch) => { 
     let productAlreadyInCart = items.some((el) => {
         return (el.id === product.id)
     })
 
     if (productAlreadyInCart) {
-        items.forEach(item => {
-            item.productCount++
+        items.filter(item => {
+            if (item.id === product.id) {
+                item.productCount++
+            }
         })
     }
 
