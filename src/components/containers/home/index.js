@@ -26,6 +26,7 @@ const HomeGrid = () => {
             price={item.price}
             id={item.id}
             isInCart={item.in_cart}
+            productCount={item.count}
             />)}
         </div>
     )

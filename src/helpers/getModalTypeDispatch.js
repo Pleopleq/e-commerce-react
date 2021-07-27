@@ -1,4 +1,4 @@
-import {setLoginModal, setRegisterModal, setProductModal, setClosedModal} from '../redux/Modals/actions'
+import { setLoginModal, setRegisterModal, setProductModal, setClosedModal } from '../redux/Modals/actions'
 import { LOGIN_MODAL, REGISTER_MODAL, PRODUCT_MODAL, NO_MODAL } from '../redux/Modals/types'
 
 export default function getModalTypeDispatch(modalType) {

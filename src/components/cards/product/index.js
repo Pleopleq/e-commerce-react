@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addItemToCart } from '../../../redux/Cart/actions'
 import LoginModalBody from '../../containers/modals/modalContent/LoginModalBody'
 
-const ProductCard = ({ name, description, imageCover, price, key, id, isInCart }) => {
+const ProductCard = ({ name, description, imageCover, price, key, id, isInCart, productCount}) => {
   const { isOpen, handleOpenModal, handleCloseModal } = useModal()
   const modal = useSelector((state) => state.modalReducer.modal)
   const cartItems = useSelector((state) => state.cartReducer.items)
@@ -43,7 +43,7 @@ const ProductCard = ({ name, description, imageCover, price, key, id, isInCart }
           </CardContent>
         </CardActionArea>
         <Box display="flex" justifyContent="space-between" m="1rem">
-            <Button size="small" color="primary" onClick={() => dispatch(addItemToCart(cartItems, {id, name, price, isInCart}))}>
+            <Button size="small" color="primary" onClick={() => dispatch(addItemToCart(cartItems, { id, name, price, isInCart, imageCover, productCount }))}>
               Add to cart
             </Button>
             <Button size="small" color="primary" onClick={() => handleOpenModal(LOGIN_MODAL)}>
