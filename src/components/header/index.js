@@ -15,13 +15,14 @@ import useModal from '../../hooks/useModal'
 import { useSelector } from 'react-redux'
 import { LOGIN_MODAL, REGISTER_MODAL, NO_MODAL } from '../../redux/Modals/types'
 import { useState } from 'react'
+import ShoppingCartBody from '../containers/modals/drawerContent/ShoppingCartBody'
 
 const Header = () => {
     const {isOpen, handleOpenModal, handleCloseModal} = useModal()
     const [isShoppinCartOpen, setIsShoppingCartOpen] = useState(false)
     const modal = useSelector((state) => state.modalReducer.modal)
+    const totalPrice = useSelector((state) => state.cartReducer.totalPrice)
     const cartItems = useSelector((state) => state.cartReducer.items)
-
     return (
     <AppBar position="static" >
         <Box display="flex" justifyContent="flex-end">
@@ -45,16 +46,27 @@ const Header = () => {
         </>
         <>
         <Drawer anchor={'right'} open={isShoppinCartOpen} onClose={() => setIsShoppingCartOpen(false)}>
-            <h1>Shopping Cart</h1>
-            {cartItems.map((item) => {
-               return (
-                <div>
-                <h2>{item.name} </h2>
-                <img src={item.imageCover} alt={`${item.name} cover`}></img>
-                <p>{`Amount: ${item.productCount}`} </p>
-                </div>
-               ) 
-            })}
+            <Box fontFamily="fontFamily" display="flex" flexDirection="column" alignItems="center">
+                <h1>Shopping Cart</h1>
+                    {cartItems.map((item) => {
+                    return (
+                        <Box>
+                            <ShoppingCartBody
+                            name={item.name}
+                            imageCover={item.imageCover}
+                            productCount={item.productCount}
+                            price={item.price}
+                            >
+                            </ShoppingCartBody>
+                        </Box>
+                    ) 
+                    })}
+                <Box display="flex" flexDirection="column" alignItems="center" mb={3}>
+                    <h2>TOTAL PRICE</h2>
+                    <strong><p>${totalPrice}</p></strong>
+                    <Button variant="contained" color="primary">Process the payment</Button>
+                </Box>
+            </Box>
         </Drawer>
         </>
     </AppBar>
